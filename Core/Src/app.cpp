@@ -68,7 +68,7 @@ extern "C"
             ukaikokko::CANMessage msg;
             while (can.read(&msg))
             {
-                if (msg.ide == CAN_ID_STD && msg.id == 0x124 && msg.dlc == 1)
+                if (msg.ide == CAN_ID_STD && msg.dlc == 1)
                 {
                     putchar(msg.data[0]);
                 }
