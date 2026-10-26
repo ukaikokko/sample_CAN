@@ -24,6 +24,7 @@ extern "C"
         printf(__TIME__ "\r\n");
 
         pc.start();
+
         {
             CAN_FilterTypeDef filter;
             filter.FilterIdHigh = 0x0000;
@@ -51,6 +52,9 @@ extern "C"
 
         if (now - pre >= 10)
         {
+            can.periodic();
+            pc.periodic();
+
             while (pc.available() > 0)
             {
                 const uint8_t data = static_cast<uint8_t>(pc.read());
@@ -70,9 +74,6 @@ extern "C"
                     putchar(msg.data[0]);
                 }
             }
-
-            can.periodic();
-            pc.periodic();
 
             pre = now;
         }
